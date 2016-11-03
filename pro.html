@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+      tr{
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+      <div class="">
+        <table class="table">
+          <thead>
+           <tr>
+             <th>编号</th>
+             <th>名字</th>
+             <th>日期</th>
+             <th>EXP</th>
+             <th>操作</th>
+           </tr>
+          </thead>
+          <tbody id="tbody">
+            
+          </tbody>
+        </table>
+      </div>
+      <nav>
+  <ul class="pagination">
+    <li><a href="javascript:;" class="abtn">1</a></li>
+    <li><a href="javascript:;" class="abtn">2</a></li>
+    <li><a href="javascript:;" class="abtn">3</a></li>
+    <li><a href="javascript:;" class="abtn">4</a></li>
+    <li><a href="javascript:;" class="abtn">5</a></li>
+    <li><a href="javascript:;" class="abtn">6</a></li>
+    <li><a href="javascript:;" class="abtn">7</a></li>
+    <li><a href="javascript:;" class="abtn">8</a></li>
+    <li><a href="javascript:;" class="abtn">9</a></li>
+    <li><a href="javascript:;" class="abtn">10</a></li>
+  </ul>
+</nav>
+
+      <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改数据</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="exampleInputEmail1">a</label>
+            <input type="email" class="form-control" id="a" placeholder="Enter a">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">b</label>
+            <input type="email" class="form-control" id="b" placeholder="Enter b">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">c</label>
+            <input type="email" class="form-control" id="c" placeholder="Enter c">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">d</label>
+            <input type="email" class="form-control" id="d" placeholder="Enter d">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnsave">保存数据更新页面</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+    var myproject={
+      "arrnum":[],//用于保存每个对象中的序号
+      "arrname":[],//用于保存每个对象中的名称
+      "arrtime":[],//用于保存每个对象中的时间
+      "mathnum":[],//用于保存每个对象中的exp
+      "getnumarr":function(){//生成1-100的id保存在arrnum中
+        
+          for(var i=1;i<101;i++){
+            this.arrnum.push(i);
+            
+          }
+        return this.arrnum;
+      },
+      "randomName":function(){//随机生成一个名字
+                       var nameArr=['赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈', '楮', '卫', '蒋', '沈', '韩', '杨',
+      '朱', '秦', '尤', '许', '何', '吕', '施', '张', '孔', '曹', '严', '华', '金', '魏', '陶', '姜',
+      '戚', '谢', '邹', '喻', '柏', '水', '窦', '章', '云', '苏', '潘', '葛', '奚', '范', '彭', '郎',
+      '鲁', '韦', '昌', '马', '苗', '凤', '花', '方', '俞', '任', '袁', '柳', '酆', '鲍', '史', '唐',
+      '费', '廉', '岑', '薛', '雷', '贺', '倪', '汤', '滕', '殷', '罗', '毕', '郝', '邬', '安', '常',
+      '乐', '于', '时', '傅', '皮', '卞', '齐', '康', '伍', '余', '元', '卜', '顾', '孟', '平', '黄',
+      '和', '穆', '萧', '尹', '姚', '邵', '湛', '汪', '祁', '毛', '禹', '狄', '米', '贝', '明', '臧',
+      '计', '伏', '成', '戴', '谈', '宋', '茅', '庞', '熊', '纪', '舒', '屈', '项', '祝', '董', '梁',
+      '杜', '阮', '蓝', '闽', '席', '季', '麻', '强', '贾', '路', '娄', '危', '江', '童', '颜', '郭',
+      '梅', '盛', '林', '刁', '锺', '徐', '丘', '骆', '高', '夏', '蔡', '田', '樊', '胡', '凌', '霍',
+      '虞', '万', '支', '柯', '昝', '管', '卢', '莫', '经', '房', '裘', '缪', '干', '解', '应', '宗',
+      '丁', '宣', '贲', '邓', '郁', '单', '杭', '洪', '包', '诸', '左', '石', '崔', '吉', '钮', '龚',
+      '程', '嵇', '邢', '滑', '裴', '陆', '荣', '翁', '荀', '羊', '於', '惠', '甄', '麹', '家', '封',
+      '芮', '羿', '储', '靳', '汲', '邴', '糜', '松', '井', '段', '富', '巫', '乌', '焦', '巴', '弓',
+      '牧', '隗', '山', '谷', '车', '侯', '宓', '蓬', '全', '郗', '班', '仰', '秋', '仲', '伊', '宫',
+      '宁', '仇', '栾', '暴', '甘', '斜', '厉', '戎', '祖', '武', '符', '刘', '景', '詹', '束', '龙',
+      '叶', '幸', '司', '韶', '郜', '黎', '蓟', '薄', '印', '宿', '白', '怀', '蒲', '邰', '从', '鄂',
+      '索', '咸', '籍', '赖', '卓', '蔺', '屠', '蒙', '池', '乔', '阴', '郁', '胥', '能', '苍', '双',
+      '闻', '莘', '党', '翟', '谭', '贡', '劳', '逄', '姬', '申', '扶', '堵', '冉', '宰', '郦', '雍',
+      '郤', '璩', '桑', '桂', '濮', '牛', '寿', '通', '边', '扈', '燕', '冀', '郏', '浦', '尚', '农',
+      '温', '别', '庄', '晏', '柴', '瞿', '阎', '充', '慕', '连', '茹', '习', '宦', '艾', '鱼', '容',
+      '向', '古', '易', '慎', '戈', '廖', '庾', '终', '暨', '居', '衡', '步', '都', '耿', '满', '弘',
+      '匡', '国', '文', '寇', '广', '禄', '阙', '东', '欧', '殳', '沃', '利', '蔚', '越', '夔', '隆',
+      '师', '巩', '厍', '聂', '晁', '勾', '敖', '融', '冷', '訾', '辛', '阚', '那', '简', '饶', '空',
+      '曾', '毋', '沙', '乜', '养', '鞠', '须', '丰', '巢', '关', '蒯', '相', '查', '后', '荆', '红',
+      '游', '竺', '权', '逑', '盖', '益', '桓', '公', '仉', '督', '晋', '楚', '阎', '法', '汝', '鄢',
+      '涂', '钦', '岳', '帅', '缑', '亢', '况', '后', '有', '琴', '归', '海', '墨', '哈', '谯', '笪',
+      '年', '爱', '阳', '佟', '商', '牟', '佘', '佴', '伯', '赏'];
+      var firstName=nameArr[parseInt(Math.random()*nameArr.length)];//生成一个姓
+
+      //名字
+      //19968-40869汉字Unicode编码范围
+         nameRang=Math.random()>0.5?1:2;
+         var lastName="";//生成一名
+         for(var nameI=0;nameI<nameRang;nameI++){
+             var lastname=Math.ceil(Math.random()*(40869-19968)+19968);
+             lastName+=String.fromCharCode(lastname);
+         }
+
+         return firstName+lastName;
+      },
+      "getarrname":function(){//得到每个对象的姓名
+          this.randomName();
+          for(var i=1;i<101;i++){
+            this.arrname.push(this.randomName())
+            
+          }
+      },
+      "getarrtime":function(){//得到每个对象的随机时间
+            for(var i=1;i<101;i++){
+            function randomDate(){
+               var dateY=parseInt(Math.random()*17+2000);//随机年份
+               var dateM=parseInt(Math.random()*12+1);//随机月份
+               var dateD=parseInt(Math.random()*30+1);//随机日子
+                dateM=dateM>9?dateM:("0"+dateM);
+                dateD=dateD>9?dateD:("0"+dateD);
+               return dateY+"-"+dateM+"-"+dateD
+            }
+
+
+            this.arrtime.push(randomDate())
+            
+          }
+      },
+      "getmathnum":function(){//得到每个对象的exp
+          for(var i=0;i<100;i++){
+            var THAT=this;
+            console.log(this.mathnum);
+            this.mathnum.push(50/10*100*(1-Math.exp(-10*THAT.getnumarr()[i]/50)));
+          }
+      },
+      "getdata":function(){//生成100个对象放入dataSource
+            var dataSource=[];
+          for(var i=0;i<100;i++){
+
+            var obj={
+              'a':this.arrnum[i],//生成100个对象对应的id
+              'b':this.arrname[i],//生成100个对象对应的姓名
+              'c':this.arrtime[i],//生成100个对象对应的时间
+              'd':this.mathnum[i]//生成100个对象对应的exp
+            }
+            dataSource.push(obj);
+          }
+          
+          return dataSource;
+            },
+        "initt":function(){//初始化table
+                for(var i=0;i<10;i++){
+                var data=this.getdata();
+
+                $("#tbody").append(`<tr class="active" data-toggle="modal" data-target="#myModal">
+                          <td>${data[i].a}</td>
+                          <td>${data[i].b}</td>
+                          <td>${data[i].c}</td>
+                          <td>${data[i].d}</td>
+                          <td><button data-id=${data[i].a}>删除</button></td>
+                        </tr>`)
+              }
+        },
+        "del":function(){//点击删除按钮删除对应数据
+                    $("#tbody").on('click','button',function(e){
+                    e.stopPropagation();
+                      // alert(1);
+                            // var id=$(this).attr("data-id");
+                            // var objsend={
+                            //   selid:id
+                            // }
+
+                            // var THIS=$(this);
+                            // $.ajax({
+                            //       type: 'post',
+                            //       url: '1.php',
+                            //       data: objsend,
+                            //       success: function (data) {//返回code为1带表数据库删除成功data={"code":1}
+                            //          if(data.code==1){
+                            //           THIS.parent().parent().remove();
+                            //          }
+                            //       },
+                            //       error: function () {
+                            //           alert('fail');
+                            //       }
+
+                      $(this).parent().parent().remove();
+                    })
+        },
+        "heightlight":function(){//点击tr高亮显示并且修改弹出框的input的value
+              $("#tbody").on('click','tr',function(){
+             $("#a").val($(this).children().eq(0).html());
+             //$("#a").attr({'data'})val($(this).children().eq(0).html());
+              $("#b").val($(this).children().eq(1).html());
+               $("#c").val($(this).children().eq(2).html());
+                $("#d").val($(this).children().eq(3).html());
+            $(this).addClass('success').siblings().removeClass('success');
+              //$(this).parent().parent().remove();
+            })
+        },
+        "save":function(){//点击摸态框保存按钮修改页面并且关闭摸态框
+          $("#btnsave").click(function(){
+              var a=$("#a").val();
+              var b=$("#b").val();
+              var c=$("#c").val();
+              var d=$("#d").val();
+              
+              $("#tbody>tr").each(function(index, el) {
+                  if($(el).hasClass('success')){
+                    $(el).children().eq(0).html(a);
+                    $(el).children().eq(1).html(b);
+                    $(el).children().eq(2).html(c);
+                    $(el).children().eq(3).html(d);
+                  }
+              });
+            });
+        },
+        "init":function(){//初始化翻页按钮
+                  var data=this.getdata();
+              var arrpage=[];
+              for(var i=0;i<100;i=i+10){
+                var start=i;
+                var end=i+10;
+                var page=[start,end];
+                arrpage.push(page)
+              }
+
+              for(var i=0;i<10;i++){
+              $($(".pagination a")[i]).attr({'data-start':arrpage[i][0]});
+              $($(".pagination a")[i]).attr({'data-end':arrpage[i][1]});
+            }
+        },
+        "pagewhere":function(){//翻页功能
+          var This=this;
+                    $('.pagination').on('click','.abtn',function(){
+                  var data=This.getdata();
+                  var startnum=$(this).attr('data-start');
+                  var endnum=$(this).attr('data-end');
+                  var datapagelist=data.slice(startnum,endnum);
+
+                $("#tbody").empty();
+                  for(var i=0;i<10;i++){
+                  
+
+                  $("#tbody").append(`<tr class="active" data-toggle="modal" data-target="#myModal">
+                            <td>${datapagelist[i].a}</td>
+                            <td>${datapagelist[i].b}</td>
+                            <td>${datapagelist[i].c}</td>
+                            <td>${datapagelist[i].d}</td>
+                            <td><button data-id=${datapagelist[i].a}>删除</button></td>
+                          </tr>`)
+                }
+
+                })
+        }
+
+    }
+    myproject.getnumarr();
+    myproject.getarrname();
+    myproject.getarrtime();
+    myproject.getmathnum();
+    myproject.initt();
+    myproject.del();
+    myproject.heightlight();
+    myproject.save();
+    myproject.init();
+    myproject.pagewhere();
+  </script>
+  </body>
+</html>
